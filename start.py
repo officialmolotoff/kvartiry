@@ -27,7 +27,7 @@ total_area = st.number_input("Общая площадь (в кв. м.):",
 # и т. д. (площадь кухни, тип комнат, ...) 
 
 # данные из Excel
-df = pd.read_excel(houses.ods)
+df = pd.read_excel(houses.fods)
 # полный адрес для удобства поиска
 df['FullAddress'] = df['Тип улицы'].astype(str) + " " + df['Адрес'].astype(str)
 address_list = df['FullAddress'].tolist()
