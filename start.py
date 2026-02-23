@@ -5,7 +5,7 @@ import pandas as pd
 import requests #библиотека для работы с HTTP-запросами
 import streamlit.components.v1 as components
 
-YANDEX_API_KEY = "65b4de15-5d42-4294-a619-5423375fa8a9"  
+YANDEX_API_KEY = st.secrets["YANDEX_API_KEY"] #секрет в streamlit (в настройках приложения смотреть)
 
 st.set_page_config(page_title = "Прогнозирование стоимости квартиры", layout = "centered")
 
@@ -52,7 +52,7 @@ with st.expander("Информация о доме", expanded = True): # expande
            #Генерирует HTML/JS компонент с Яндекс.Картой
            html_code = f"""
              <div id="map" style="width: 100%; height: 400px; border-radius: 10px;"></div>
-              <script src="https://api-maps.yandex.ru/2.1/?apikey=65b4de15-5d42-4294-a619-5423375fa8a9&lang=ru_RU" type="text/javascript"></script>
+              <script src="https://api-maps.yandex.ru/2.1/?apikey={YANDEX_API_KEY}&lang=ru_RU" type="text/javascript"></script>
               <script type="text/javascript">
                 ymaps.ready(init);
                 function init() {{
