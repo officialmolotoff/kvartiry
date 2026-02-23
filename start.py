@@ -47,7 +47,7 @@ with st.expander("Информация о доме", expanded = True): # expande
            # Получаем строку с данными для выбранного адреса
            # .iloc[0] берет первую (и единственную) найденную строку
            building_details = df[df['FullAddress'] == selected_address].iloc[0]
-           building_details['FullAddress'] = building_details['Тип улицы'].astype(str) + " " + building_details['Адрес'].astype(str)
+           building_details['FullAddress'] = building_details['Тип улицы'] + " " + building_details['Адрес']
 
            #Генерирует HTML/JS компонент с Яндекс.Картой
            html_code = f"""
