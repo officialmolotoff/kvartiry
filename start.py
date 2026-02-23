@@ -2,6 +2,10 @@
 
 import streamlit as st  
 import pandas as pd
+import requests #библиотека для работы с HTTP-запросами
+import streamlit.components.v1 as components
+
+YANDEX_API_KEY = "65b4de15-5d42-4294-a619-5423375fa8a9"  
 
 st.set_page_config(page_title = "Прогнозирование стоимости квартиры", layout = "centered")
 
@@ -39,9 +43,31 @@ with st.expander("Информация о доме", expanded = True): # expande
             placeholder = "Например: улица омская, 21",
           )
   if selected_address:
+           
            # Получаем строку с данными для выбранного адреса
            # .iloc[0] берет первую (и единственную) найденную строку
            building_details = df[df['FullAddress'] == selected_address].iloc[0]
+
+          """Генерирует HTML/JS компонент с Яндекс.Картой"""
+          html_code = f"""
+             <div id="map" style="width: 100%; height: 400px; border-radius: 10px;"></div>
+             <script src="https://api-maps.yandex.ru/2.1/?apikey={YANDEX_API_KEY}&lang=ru_RU" type="text/javascript"></script>
+             <script type="text/javascript">
+            ymaps.ready(init);
+            function init() {{
+                var myMap = new ymaps.Map("map", {{
+                    center: [{building_details['Широта']}, {building_details['Долгота']}],
+                    zoom: 16
+                }});
+                var myPlacemark = new ymaps.Placemark([{building_details['Широта']}, {building_details['Долгота']}], {{
+                    balloonContent: '{df['FullAddress']}'
+                }});
+                myMap.geoObjects.add(myPlacemark);
+            }}
+                </script>
+               """
+           components.html(html_code, height=410)
+           
            st.write(f"**Год постройки:** {building_details['Год_постройки']}")
            st.write(f"**Этажность:** {building_details['Этажность']}")
            # Проверка на возможное пустое значение для Потолка
