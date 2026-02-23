@@ -48,8 +48,8 @@ with st.expander("Информация о доме", expanded = True): # expande
            # .iloc[0] берет первую (и единственную) найденную строку
            building_details = df[df['FullAddress'] == selected_address].iloc[0]
 
-          """Генерирует HTML/JS компонент с Яндекс.Картой"""
-          html_code = f"""
+           """Генерирует HTML/JS компонент с Яндекс.Картой"""
+           html_code = f"""
              <div id="map" style="width: 100%; height: 400px; border-radius: 10px;"></div>
              <script src="https://api-maps.yandex.ru/2.1/?apikey={YANDEX_API_KEY}&lang=ru_RU" type="text/javascript"></script>
              <script type="text/javascript">
