@@ -48,7 +48,8 @@ with st.expander("Информация о доме", expanded = True): # expande
            if pd.notna(building_details['Потолок']):
              st.write(f"**Высота потолков:** {building_details['Потолок']} м")
            else:
-             st.write("**Высота потолков:** неизвестно") 
+             st.write("**Высота потолков:** неизвестно")
+           st.write(f"**Расстояние до центра:** {building_details['Расстояние_до_центра']} км")
             
 
            
