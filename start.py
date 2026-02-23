@@ -48,24 +48,24 @@ with st.expander("Информация о доме", expanded = True): # expande
            # .iloc[0] берет первую (и единственную) найденную строку
            building_details = df[df['FullAddress'] == selected_address].iloc[0]
 
-           """Генерирует HTML/JS компонент с Яндекс.Картой"""
+           #Генерирует HTML/JS компонент с Яндекс.Картой
            html_code = f"""
              <div id="map" style="width: 100%; height: 400px; border-radius: 10px;"></div>
-             <script src="https://api-maps.yandex.ru/2.1/?apikey={YANDEX_API_KEY}&lang=ru_RU" type="text/javascript"></script>
-             <script type="text/javascript">
-            ymaps.ready(init);
-            function init() {{
-                var myMap = new ymaps.Map("map", {{
+              <script src="https://api-maps.yandex.ru/2.1/?apikey={YANDEX_API_KEY}&lang=ru_RU" type="text/javascript"></script>
+              <script type="text/javascript">
+                ymaps.ready(init);
+                function init() {{
+                    var myMap = new ymaps.Map("map", {{
                     center: [{building_details['Широта']}, {building_details['Долгота']}],
                     zoom: 16
                 }});
-                var myPlacemark = new ymaps.Placemark([{building_details['Широта']}, {building_details['Долгота']}], {{
-                    balloonContent: '{df['FullAddress']}'
+                    var myPlacemark = new ymaps.Placemark([{building_details['Широта']}, {building_details['Долгота']}], {{
+                        balloonContent: '{df['FullAddress']}'
                 }});
-                myMap.geoObjects.add(myPlacemark);
+                       myMap.geoObjects.add(myPlacemark);
             }}
                 </script>
-               """
+           """
            components.html(html_code, height=410)
            
            st.write(f"**Год постройки:** {building_details['Год_постройки']}")
