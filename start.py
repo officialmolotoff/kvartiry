@@ -51,7 +51,7 @@ with st.expander("Информация о доме", expanded = True): # expande
            #Генерирует HTML/JS компонент с Яндекс.Картой
            html_code = f"""
              <div id="map" style="width: 100%; height: 400px; border-radius: 10px;"></div>
-              <script src="https://api-maps.yandex.ru/2.1/?apikey={YANDEX_API_KEY}&lang=ru_RU" type="text/javascript"></script>
+              <script src="https://api-maps.yandex.ru/2.1/?apikey=65b4de15-5d42-4294-a619-5423375fa8a9&lang=ru_RU" type="text/javascript"></script>
               <script type="text/javascript">
                 ymaps.ready(init);
                 function init() {{
@@ -75,7 +75,7 @@ with st.expander("Информация о доме", expanded = True): # expande
              st.write(f"**Высота потолков:** {building_details['Потолок']} м")
            else:
              st.write("**Высота потолков:** неизвестно")
-           st.write(f"**Расстояние до центра:** {building_details['Расстояние_до_центра']} км")
+           st.write(f"**Расстояние до центра:** {building_details['Расстояние_до_центра']:.2f} км")
             
 
            
